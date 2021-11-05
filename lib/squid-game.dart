@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'dart:math';
 
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:native_admob_flutter/native_admob_flutter.dart';
 import 'package:squid_flower/game/npc.dart';
 import 'package:squid_flower/game/status.dart';
 import 'package:squid_flower/utils/storages.dart';
@@ -49,7 +49,7 @@ class SquidGame extends Game {
   double playTime = 120;
   double readyTime = 5;
 
-  late InterstitialAd interstitialAd;
+  late AdmobInterstitial interstitialAd;
 
   SquidGame() {
     initialize();
@@ -57,7 +57,7 @@ class SquidGame extends Game {
 
   void initialize() async {
     resize(await Flame.util.initialDimensions());
-    interstitialAd = InterstitialAd(unitId: Banners.interstitial());
+    interstitialAd = AdmobInterstitial(adUnitId: Banners.interstitial());
     _loadBestTime();
 
     background = Backyard(this);
@@ -139,7 +139,7 @@ class SquidGame extends Game {
     yh.mute();
     resultView.setStatus(status);
 
-    await interstitialAd.show();
+    interstitialAd.show();
     loadBgm();
   }
 

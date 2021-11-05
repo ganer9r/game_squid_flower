@@ -83,8 +83,8 @@ class ButtonView {
 
   _buildTrophy() {
     trophyRect = Rect.fromLTWH(
-      90,
       20,
+      90,
       50,
       50,
     );

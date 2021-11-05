@@ -56,6 +56,30 @@ class Ready {
     double x = (game.screenSize.width - 200) / 2;
     final offset = Offset(x, 160);
     textPainter.paint(c, offset);
+
+    _renderMessage(c);
+  }
+
+  _renderMessage(Canvas c) {
+    final textSpan = TextSpan(
+      text: "Tap to move forward",
+      style: TextStyle(color: Colors.black, fontFamily: "Kty", fontSize: 20),
+    );
+
+    final textPainter = TextPainter(
+      text: textSpan,
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.rtl,
+    );
+
+    textPainter.layout(
+      minWidth: 200,
+      maxWidth: 200,
+    );
+
+    double x = (game.screenSize.width - 200) / 2;
+    final offset = Offset(x, 500);
+    textPainter.paint(c, offset);
   }
 
   void update(double t) {}

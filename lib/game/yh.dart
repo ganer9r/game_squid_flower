@@ -68,15 +68,13 @@ class Yh {
   _message(Canvas c) {
     if (!game.isReadyCompleted()) return;
 
-    const bg = Colors.black;
     const size = 1.5;
     String text = isSong() ? "무궁화 꽃이 피었습니다" : ".....";
+    Color color = isSong() ? Colors.red : Colors.green;
 
     final textSpan = TextSpan(
       text: text,
-      style: TextStyle(color: Colors.black, fontSize: 14
-          // ..color = Colors.amber,
-          ),
+      style: TextStyle(color: color, fontSize: 15, fontWeight: FontWeight.bold),
     );
 
     final textPainter = TextPainter(

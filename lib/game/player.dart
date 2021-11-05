@@ -12,13 +12,18 @@ class Player {
   late Size screenSize;
   late Rect playerRect;
   late Paint playerPaint;
+
+  late Sprite pointerSprite;
+
   late double safedY;
   late SpriteSheet spritesheet;
   int step = 1;
+  double time = 0;
 
   Player(this.game, this.screenSize) {
     _setStartedRect();
     _setPlayer();
+    _setPointer();
 
     safedY = game.background.safeHeight() - game.tileSize;
   }
@@ -27,9 +32,31 @@ class Player {
     // c.drawRect(playerRect, playerPaint);
     int mod = step % 4;
     spritesheet.getSprite(0, mod == 3 ? 1 : mod).renderRect(c, playerRect);
+
+    double y = this.playerRect.top - 2;
+    double x = this.playerRect.left;
+
+    _pointerRender(c);
   }
 
-  void update(double t) {}
+  _pointerRender(Canvas c) {
+    double t = (time - 0.5).abs();
+
+    pointerSprite.renderRect(
+        c,
+        Rect.fromLTWH(
+            playerRect.left + game.tileSize / 4,
+            playerRect.top - game.tileSize / 1.5 - (t * game.tileSize / 3),
+            game.tileSize / 2,
+            game.tileSize / 2));
+  }
+
+  void update(double t) {
+    time += t;
+    if (time >= 1) {
+      time = 0;
+    }
+  }
 
   _setStartedRect() {
     double x = (screenSize.width - game.tileSize) / 2;
@@ -41,7 +68,6 @@ class Player {
 
   _setPlayer() {
     playerPaint = Paint();
-    playerPaint.color = Colors.yellow;
 
     spritesheet = SpriteSheet(
       imageName: 'sprite_p.png',
@@ -50,6 +76,10 @@ class Player {
       columns: 4,
       rows: 1,
     );
+  }
+
+  _setPointer() {
+    pointerSprite = Sprite('pointer.png');
   }
 
   move() {

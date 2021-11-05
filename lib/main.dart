@@ -1,17 +1,17 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
-import 'package:native_admob_flutter/native_admob_flutter.dart';
 
 import 'squid-game.dart';
 import 'package:games_services/games_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.initialize();
+  Admob.initialize();
 
   Util flameUtil = Util();
   await flameUtil.fullScreen();

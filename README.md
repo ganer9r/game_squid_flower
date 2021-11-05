@@ -44,3 +44,12 @@ keytool -keystore squid-release-key.jks -list -v
   - 확인용
   - flutter build apk --release --no-sound-null-safety
   - mv ./build/app/outputs/apk/release/app-release.apk ~/Downloads/squid.apk
+
+
+
+
+#ios 캐시 삭제
+- game services는 Podfile에 platform :ios, '11.0' 추가 필요.
+- pod deintegrate
+- pod cache clean —all
+- pod update
